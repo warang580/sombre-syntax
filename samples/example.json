@@ -1,0 +1,9 @@
+{
+    "example": "values",
+    "for": "json",
+    "data": {
+        "foo": true,
+        "bar": false
+    },
+    "values": [true, false, 0, "red"]
+}

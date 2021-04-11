@@ -1,0 +1,252 @@
+@import "syntax-variables";
+
+atom-text-editor.editor {
+  .wrap-guide {
+    background-color: @syntax-indent-guide-color;
+  }
+
+  .bracket-matcher .region {
+    border-bottom: 1px solid @white;
+    background-color: @whitebg;
+  }
+}
+
+atom-text-editor {
+  background-color: @syntax-background-color;
+  color: @syntax-text-color;
+
+  .wrap-guide {
+    background-color: @syntax-wrap-guide-color;
+  }
+
+  .indent-guide {
+    color: @syntax-indent-guide-color;
+  }
+
+  .invisible-character {
+    color: @syntax-invisible-character-color;
+  }
+
+  .line.cursor-line {
+    background-color: @syntax-gutter-background-color-selected;
+  }
+
+  .gutter {
+    background-color: @syntax-gutter-background-color;
+    color: @syntax-gutter-text-color;
+
+    .line-number {
+      &.cursor-line {
+        background-color: @syntax-gutter-background-color-selected;
+        color: @syntax-gutter-text-color-selected;
+      }
+
+      &.cursor-line-no-selection {
+        color: @syntax-gutter-text-color-selected;
+      }
+    }
+  }
+
+  .gutter .line-number.folded,
+  .gutter .line-number:after,
+  .fold-marker:after {
+    color: @light-gray;
+  }
+
+  .invisible {
+    color: @syntax-text-color;
+  }
+
+  .cursor {
+    color: @syntax-cursor-color;
+  }
+
+  .selection .region {
+    background-color: @syntax-selection-color;
+  }
+}
+
+atom-text-editor .search-results .syntax--marker .region {
+  background-color: transparent;
+  border: 1px solid @syntax-result-marker-color;
+}
+
+atom-text-editor .search-results .syntax--marker.current-result .region {
+  border: 1px solid @syntax-result-marker-color-selected;
+}
+
+atom-text-editor[mini] .scroll-view {
+  padding-left: 1px;
+}
+
+.syntax--comment,
+.syntax--comment.syntax--punctuation {
+  color: @green-500;
+}
+.syntax--comment.syntax--punctuation {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.syntax--punctuation.syntax--definition.syntax--comment,
+.syntax--comment.syntax--block.syntax--documentation {
+  font-style: normal;
+}
+
+.syntax--punctuation,
+.syntax--brace,
+.syntax--curly,
+.syntax--comma,
+.syntax--arrow {
+  color: @gray-400;
+  font-weight: normal;
+}
+
+// Arrow functions are considered as "keywords" and "punctuation"
+.syntax--type.syntax--arrow, {
+  color: @gray-400;
+  font-weight: bold;
+}
+
+.syntax--keyword {
+  border-bottom: 2px solid @gray-600;
+
+  // Reset for punctuation, etc.
+  &.syntax--other,
+  &.syntax--operator {
+    border-bottom: none;
+  }
+
+  &.syntax--operator {
+    font-weight: bold;
+    color: @gray-400;
+  }
+}
+
+.syntax--storage {
+  // !important to avoid override by .syntax--type
+  color: @gray-400 !important;
+}
+
+.syntax--constant {
+  color: @gray-250;
+  // Target things like "true" or "false" and apply [keywords] styling
+  // and [storage] color
+  &.syntax--language {
+    color: @gray-400;
+    border-bottom: 1px solid @gray-600;
+  }
+
+  // CSS prop: *value*
+  &.syntax--property-value {
+    font-weight: bold;
+  }
+}
+
+.syntax--numeric {
+  color: @gray-300;
+}
+
+.syntax--entity {
+  color: @gray-200;
+}
+
+// Tag entities (ex: html tags)
+.syntax--entity.syntax--tag {
+  // border-bottom: 1px solid @gray-400;
+  // color: @gray-700;
+  // background-color: @gray-500;
+  font-weight: bold;
+}
+
+// Tag attributes names
+.syntax--other.syntax--entity.syntax--attribute-name {
+  color: @gray-300;
+}
+
+.syntax--variable {
+  color: @gray-50;
+
+  // Variables given by env (like window and console in JS)
+  &.syntax--support {
+    font-style: italic;
+  }
+
+  &.syntax--property {
+    // Make properties like obj.bar behave like [storage] (but slightly lighter)
+    color: @gray-200;
+
+    &.syntax--unquoted {
+      // For some reasons, in "foo: *bar*", "bar" is unquoted
+      color: @gray-350;
+    }
+  }
+}
+
+.syntax--invalid,
+.syntax--illegal {
+  background-color: @white;
+  color: @gray-800;
+}
+
+.syntax--string {
+  color: @gray-250;
+
+  background-color: @gray-850;
+
+  &.syntax--begin,
+  &.syntax--end,
+  &.syntax--definition,
+  &.syntax-punctuation {
+    background-color: transparent;
+  }
+}
+
+.syntax--link {
+  color: @gray-200;
+}
+
+.syntax--type {
+  color: @gray-150;
+}
+
+.syntax--function {
+  &.syntax--support,
+  &.syntax--entity {
+    color: @gray-350;
+    border: 1px solid @gray-750;
+    background-color: @gray-700;
+  }
+}
+
+// Make class names bold
+.syntax--meta.syntax--class {
+  font-weight: bold;
+
+  // And only names, not sub-elements
+  & > * {
+    font-weight: normal;
+  }
+}
+
+.syntax--markup {
+  &.syntax--strike {
+    text-decoration: line-through;
+  }
+
+  &.syntax--bold {
+    font-weight: bold;
+  }
+
+  &.syntax--italic {
+    font-style: italic;
+  }
+
+  &.syntax--heading {
+    font-weight: bold;
+  }
+
+  &.syntax--link {
+    text-decoration: underline;
+  }
+}
