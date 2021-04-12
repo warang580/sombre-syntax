@@ -1,14 +1,8 @@
 @import "syntax-variables";
 
-atom-text-editor.editor {
-  .wrap-guide {
-    background-color: @syntax-indent-guide-color;
-  }
-
-  .bracket-matcher .region {
-    border-bottom: 1px solid @white;
-    background-color: @whitebg;
-  }
+.bracket-matcher .region {
+  border-bottom: 2px solid @white;
+  background-color: @whitebg;
 }
 
 atom-text-editor {
@@ -81,8 +75,11 @@ atom-text-editor[mini] .scroll-view {
 
 .syntax--comment,
 .syntax--comment.syntax--punctuation {
-  color: @green-500;
+  // This is made so punctuation for comments can be the same color as comments
+  color: @green-500 !important;
+  font-style: italic;
 }
+
 .syntax--comment.syntax--punctuation {
   font-style: normal;
   font-weight: bold;
@@ -98,7 +95,7 @@ atom-text-editor[mini] .scroll-view {
 .syntax--curly,
 .syntax--comma,
 .syntax--arrow {
-  color: @gray-400;
+  color: @gray-400 !important;
   font-weight: normal;
 }
 
@@ -115,6 +112,11 @@ atom-text-editor[mini] .scroll-view {
   &.syntax--other,
   &.syntax--operator {
     border-bottom: none;
+  }
+
+  // But not for "use"
+  &.syntax--use {
+    color: @gray-400;
   }
 
   &.syntax--operator {
@@ -174,11 +176,11 @@ atom-text-editor[mini] .scroll-view {
 
   &.syntax--property {
     // Make properties like obj.bar behave like [storage] (but slightly lighter)
-    color: @gray-200;
+    color: @gray-400;
 
     &.syntax--unquoted {
       // For some reasons, in "foo: *bar*", "bar" is unquoted
-      color: @gray-350;
+      color: @gray-400;
     }
   }
 }
@@ -193,6 +195,8 @@ atom-text-editor[mini] .scroll-view {
   color: @gray-250;
 
   background-color: @gray-850;
+  border-radius: 5px;
+  padding: 0.12em 0em;
 
   &.syntax--begin,
   &.syntax--end,
@@ -203,7 +207,14 @@ atom-text-editor[mini] .scroll-view {
 }
 
 .syntax--link {
-  color: @gray-200;
+  // Only underline links otherwise <link> in html etc. gets stylized
+  &.syntax--underline,
+  .syntax--underline {
+    color: @gray-250;
+    background-color: @green-500;
+    border-radius: 5px;
+    padding: 0.12em 0em;
+  }
 }
 
 .syntax--type {
@@ -216,19 +227,35 @@ atom-text-editor[mini] .scroll-view {
     color: @gray-350;
     border: 1px solid @gray-750;
     background-color: @gray-700;
+    padding: 0.12em 0em;
+    border-radius: 3px;
   }
 }
 
-// Make class names bold
-.syntax--meta.syntax--class {
+// namespace <class>, use <class>, extends <class>, class <class>, etc.
+.syntax--class.syntax--name,
+.syntax--support.syntax--class,
+.syntax--inherited-class {
+  border-bottom: 2px solid @gray-700;
+  color: @gray-200;
+}
+
+// In Javascript, make class stand out but not like a "standard" class
+.syntax--js .syntax--meta.syntax--class,
+.syntax--js .syntax--module {
   font-weight: bold;
-
-  // And only names, not sub-elements
-  & > * {
-    font-weight: normal;
-  }
 }
 
+// namespace keyword color
+.syntax--namespace:not(.syntax--name):not(.syntax--other) {
+  color: @gray-400;
+}
+
+.syntax--support.syntax--other.syntax--namespace {
+  color: @gray-300;
+}
+
+// Markdown, etc.
 .syntax--markup {
   &.syntax--strike {
     text-decoration: line-through;
@@ -248,5 +275,10 @@ atom-text-editor[mini] .scroll-view {
 
   &.syntax--link {
     text-decoration: underline;
+  }
+
+  // Raw code
+  &.syntax--raw {
+    color: @gray-400;
   }
 }
