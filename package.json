@@ -1,7 +1,7 @@
 {
   "name": "sombre-syntax",
   "theme": "syntax",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Monochromatic theme (gray-blue) except for comments (gray-green).",
   "keywords": [
     "gray",
