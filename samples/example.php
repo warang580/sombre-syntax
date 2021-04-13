@@ -1,8 +1,8 @@
 <?php
 
-use Recipes\Vegetable;
+use Recipes\Vegetable as Veggie;
 
-class Spinach extends Vegetable
+class Spinach extends Veggie
 {
   public $cooked = false;
 

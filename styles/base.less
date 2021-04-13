@@ -22,7 +22,7 @@ atom-text-editor {
   }
 
   .line.cursor-line {
-    background-color: @syntax-gutter-background-color-selected;
+    background-color: rgba(47, 55, 69, 0.5);
   }
 
   .gutter {
@@ -86,7 +86,7 @@ atom-text-editor[mini] .scroll-view {
 }
 
 .syntax--punctuation.syntax--definition.syntax--comment,
-.syntax--comment.syntax--block.syntax--documentation {
+.syntax--comment.syntax--block {
   font-style: normal;
 }
 
@@ -95,7 +95,7 @@ atom-text-editor[mini] .scroll-view {
 .syntax--curly,
 .syntax--comma,
 .syntax--arrow {
-  color: @gray-400 !important;
+  color: @gray-450 !important;
   font-weight: normal;
 }
 
@@ -176,11 +176,11 @@ atom-text-editor[mini] .scroll-view {
 
   &.syntax--property {
     // Make properties like obj.bar behave like [storage] (but slightly lighter)
-    color: @gray-400;
+    color: @gray-350;
 
     &.syntax--unquoted {
       // For some reasons, in "foo: *bar*", "bar" is unquoted
-      color: @gray-400;
+      color: @gray-350;
     }
   }
 }
@@ -194,9 +194,12 @@ atom-text-editor[mini] .scroll-view {
 .syntax--string {
   color: @gray-250;
 
-  background-color: @gray-850;
-  border-radius: 5px;
-  padding: 0.12em 0em;
+  // Don't color concatenation operators
+  &:not(.syntax--operator) {
+    background-color: rgba(24, 31, 42, 0.65);
+    border-radius: 5px;
+    padding: 0.12em 0em;
+  }
 
   &.syntax--begin,
   &.syntax--end,
@@ -211,7 +214,7 @@ atom-text-editor[mini] .scroll-view {
   &.syntax--underline,
   .syntax--underline {
     color: @gray-250;
-    background-color: @green-500;
+    background-color: rgba(107, 119, 128, 0.35);
     border-radius: 5px;
     padding: 0.12em 0em;
   }
@@ -226,7 +229,7 @@ atom-text-editor[mini] .scroll-view {
   &.syntax--entity {
     color: @gray-350;
     border: 1px solid @gray-750;
-    background-color: @gray-700;
+    background-color: rgba(55, 65, 81, 0.65);
     padding: 0.12em 0em;
     border-radius: 3px;
   }
@@ -235,9 +238,14 @@ atom-text-editor[mini] .scroll-view {
 // namespace <class>, use <class>, extends <class>, class <class>, etc.
 .syntax--class.syntax--name,
 .syntax--support.syntax--class,
-.syntax--inherited-class {
+.syntax--inherited-class,
+.syntax--entity.syntax--other.syntax--alias {
   border-bottom: 2px solid @gray-700;
   color: @gray-200;
+}
+// as <class>
+.syntax--keyword.syntax--other.syntax--use-as {
+  color: @gray-400;
 }
 
 // In Javascript, make class stand out but not like a "standard" class
