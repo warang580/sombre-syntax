@@ -2,7 +2,7 @@
 
 .bracket-matcher .region {
   border-bottom: 2px solid @white;
-  background-color: @whitebg;
+  background-color: hsla(195, 18%, 42%, 0.5);
 }
 
 atom-text-editor {
@@ -37,6 +37,18 @@ atom-text-editor {
 
       &.cursor-line-no-selection {
         color: @syntax-gutter-text-color-selected;
+      }
+
+      &.git-line-added {
+        border-left: 2px solid hsla(160, 59%, 72%, 0.95);
+      }
+
+      &.git-line-modified {
+        border-left: 2px solid hsla(30, 59%, 72%, 0.95);
+      }
+
+      &.git-line-removed {
+        border-left: 2px solid hsla(0, 59%, 72%, 0.95);
       }
     }
   }
@@ -76,7 +88,7 @@ atom-text-editor[mini] .scroll-view {
 .syntax--comment,
 .syntax--comment.syntax--punctuation {
   // This is made so punctuation for comments can be the same color as comments
-  color: @green-500 !important;
+  color: hsla(195, 18%, 42%, 0.9) !important;
   font-style: italic;
 }
 
@@ -128,6 +140,12 @@ atom-text-editor[mini] .scroll-view {
 .syntax--storage {
   // !important to avoid override by .syntax--type
   color: @gray-400 !important;
+}
+
+// function parameters type style
+.syntax--typehinted .syntax--storage.syntax--type {
+  color: @gray-200 !important;
+  border-bottom: 2px solid @gray-700;
 }
 
 .syntax--constant {
